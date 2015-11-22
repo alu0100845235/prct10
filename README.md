@@ -1,6 +1,6 @@
-#Práctica 8 de LPP
+#Práctica 9 de LPP
 
-Programación Orientada a Objetos: Herencia.
+Programación Orientada a Objetos: Módulos.
 
 # Desarrolladores
 
