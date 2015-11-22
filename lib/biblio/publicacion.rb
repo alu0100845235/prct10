@@ -10,7 +10,7 @@ class Publicacion < Referencia
         end
         raise ArgumentError, "La serie debe se un string" unless issn.is_a?(String)
         
-        @pinicio = pagina_fin
+        @pinicio = pagina_inicio
         @pfin = pagina_fin
         @issn = issn
     end

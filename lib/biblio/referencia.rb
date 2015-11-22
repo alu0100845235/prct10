@@ -1,6 +1,7 @@
 require 'date'
 
 class Referencia
+    include Comparable
     attr_reader :autores, :titulo, :editorial, :fecha_publicacion
     
     def initialize(autores, titulo, editorial, fecha_publicacion)
@@ -11,9 +12,19 @@ class Referencia
         raise ArgumentError, "Fecha debe se un string (dd-mm-yyyy)" unless fecha_publicacion.is_a?(String)
         
         @autores = autores
+        @autores.sort       #ordenamos los autores
         @titulo = titulo
         @fecha_publicacion = Date.parse(fecha_publicacion)
         @editorial = editorial
+    end
+    
+    def <=>(other)
+        # devolvemos nil si no son del tipo Referencia
+        return nil unless other.is_a? Referencia
+        # realizamos las comparaciones necesarias
+        return @autores <=> other.autores unless @autores & other.autores == @autores
+        return @titulo <=> other.titulo unless @titulo == other.titulo
+        return @fecha_publicacion <=> other.fecha_publicacion
     end
     
 end
