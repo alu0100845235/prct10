@@ -4,9 +4,9 @@ describe Biblio do
     before :each do
         @b1 = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "Programming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "07/07/2013", ["978-1937785499", "1937785491"])
         @b2 = Libro.new(["Scott Chacon"], "Pro Git 2009th Edition", "Pro", "Apress" , 2009, "27/08/2009", ["978- 1430218333", "1430218339"])
-        @b3 = Libro.new(["David Flanagan", "Yukihiro Matsumoto"], "The Ruby Programming Language", nil, "O’Reilly Media", 1, "04/02/2008", ["0596516177", "978-0596516178"])
+        @b3 = Libro.new(["David Flanagan", "Yukihiro Matsumoto"], "The Ruby Programming Language", nil, "O'Reilly Media", 1, "04/02/2008", ["0596516177", "978-0596516178"])
         @b4 = Libro.new(["David Chelimsky", "Dave Astels", "Bryan Helmkamp", "Dan North", "Zach Dennis", "Aslak Helleson"], "The RSpec Book: Behaviour Driven Development with RSpec, Cucumber, and Friends", "The Facets of Ruby", "Pragmatic Bookshelf", 1, "25/12/2010", ["1934356379", "978-1934356371"])
-        @b5 = Libro.new(["Richard E"], "Silverman Git Pocket Guide", nil, "O’Reilly Media", 1, "02/08/2013", ["1449325866", "978-1449325862"])
+        @b5 = Libro.new(["Richard E"], "Silverman Git Pocket Guide", nil, "O'Reilly Media", 1, "02/08/2013", ["1449325866", "978-1449325862"])
         
         @p1 = Periodico.new(["autor"], "Titulo", "Periodico", "07/07/2013", 1, nil, "123456789")
         @p2 = Periodico.new(["autor1", "autor2"], "Titulo2", "Periodico2", "08/08/2013", 1, 2, "123456789")
