@@ -1,4 +1,3 @@
-# encoding: utf-8
 require 'spec_helper'
 
 describe Biblio do
@@ -27,8 +26,8 @@ describe Biblio do
         @l3.push_back(@p1)
     end
     
-    describe "Comprobación de la herencia de Libro" do
-        it "Test herencicia lista" do
+    describe "Comprobacion de la herencia de Libro" do
+        it "Test herencia lista" do
             expect(@b1.is_a?Object).to be true
             expect(@b1.is_a?Referencia).to be true
             expect(@b1.instance_of?Libro).to be true
@@ -41,7 +40,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de la herencia de Periodico" do
+    describe "Comprobacion de la herencia de Periodico" do
         it "Test herencia lista" do
             expect(@p1.is_a?Object).to be true
             expect(@p1.is_a?Referencia).to be true
@@ -58,7 +57,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de la herencia de Revista" do
+    describe "Comprobacion de la herencia de Revista" do
         it "Test herencia lista" do
             expect(@r1.is_a?Object).to be true
             expect(@r1.is_a?Referencia).to be true
@@ -75,7 +74,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de la herencia de Documento Electronico" do
+    describe "Comprobacion de la herencia de Documento Electronico" do
         it "Test herencia lista" do
             expect(@e1.is_a?Object).to be true
             expect(@e1.is_a?Referencia).to be true
@@ -92,7 +91,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de la herencia de la lista" do
+    describe "Comprobacion de la herencia de la lista" do
         it "Test herencia lista" do
             expect(@l1.is_a?Object).to be true
             expect(@l1.instance_of?List).to be true
@@ -102,7 +101,7 @@ describe Biblio do
     end
     
     
-    describe "Comprobación de una correcta construcción de Libro" do
+    describe "Comprobacion de una correcta construccion de Libro" do
         it "Existe al menos un autor" do
             expect(@b1.autores).not_to eq(nil)
             expect(@b2.autores).not_to eq(nil)
@@ -140,7 +139,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de una correcta construcción de Periodico" do
+    describe "Comprobacion de una correcta construccion de Periodico" do
         it "Existe al menos un autor" do
             expect(@p1.autores).not_to eq(nil)
             expect(@p2.autores).not_to eq(nil)
@@ -178,7 +177,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de una correcta construcción de Revista" do
+    describe "Comprobacion de una correcta construccion de Revista" do
         it "Existe al menos un autor" do
             expect(@r1.autores).not_to eq(nil)
             expect(@r2.autores).not_to eq(nil)
@@ -221,7 +220,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de una correcta construcción de Documento Electronico" do
+    describe "Comprobacion de una correcta construccion de Documento Electronico" do
         it "Existe al menos un autor" do
             expect(@e1.autores).not_to eq(nil)
             expect(@e2.autores).not_to eq(nil)
@@ -264,43 +263,43 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de un correcto funcionamiento de los métodos de Libro" do
-        it "Test método autor" do
+    describe "Comprobacion de un correcto funcionamiento de los metodos de Libro" do
+        it "Test metodo autor" do
             expect(@b1.autores).to eq(["Dave Thomas", "Andy Hunt", "Chad Fowler"])
             expect(@b2.autores).to eq(["Scott Chacon"])
             expect(@b3.autores).to eq(["David Flanagan", "Yukihiro Matsumoto"])
         end
-        it "Test método titulo" do
+        it "Test metodo titulo" do
             expect(@b1.titulo).to eq("Programming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide")
             expect(@b2.titulo).to eq("Pro Git 2009th Edition")
             expect(@b3.titulo).to eq("The Ruby Programming Language")
         end
-        it "Test método serie" do
+        it "Test metodo serie" do
             expect(@b1.serie).to eq("The Facets of Ruby")
             expect(@b2.serie).to eq("Pro")
             expect(@b3.serie).to eq(nil)
         end
-        it "Test método editorial" do
+        it "Test metodo editorial" do
             expect(@b1.editorial).to eq("Pragmatic Bookshelf")
             expect(@b2.editorial).to eq("Apress")
             expect(@b3.editorial).to eq("O'Reilly Media")
         end
-        it "Test método edicion" do
+        it "Test metodo edicion" do
             expect(@b1.n_edicion).to eq(4)
             expect(@b2.n_edicion).to eq(2009)
             expect(@b3.n_edicion).to eq(1)
         end
-        it "Test método fecha" do
+        it "Test metodo fecha" do
             expect(@b1.fecha_publicacion.to_s).to eq("2013-07-07")
             expect(@b2.fecha_publicacion.to_s).to eq("2009-08-27")
             expect(@b3.fecha_publicacion.to_s).to eq("2008-02-04")
         end
-        it "Test método isbn" do
+        it "Test metodo isbn" do
             expect(@b1.isbn).to eq(["978-1937785499", "1937785491"])
             expect(@b2.isbn).to eq(["978-1430218333", "1430218339"])
             expect(@b3.isbn).to eq(["0596516177", "978-0596516178"])
         end
-        it "Test método to_s (nos devuelve una referencia formateada)" do
+        it "Test metodo to_s (nos devuelve una referencia formateada)" do
             expect(@b1.to_s).to eq(@b1.to_s)
             expect(@b2.to_s).to eq(@b2.to_s)
             expect(@b3.to_s).to eq(@b3.to_s)
@@ -325,7 +324,7 @@ describe Biblio do
       end
     end
     
-    describe "Comprobación de una correcta construcción de la lista" do
+    describe "Comprobacion de una correcta construccion de la lista" do
         it "Existe al menos un Nodo" do
             expect(@l1.front).not_to eq(nil)
             expect(@l2.front).not_to eq(nil)
@@ -346,14 +345,14 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación del funcionamiento del enlace entre Nodos" do
+    describe "Comprobacion del funcionamiento del enlace entre Nodos" do
         it "Test enlace nodos" do
             expect(@l1.front.value).to eq(nil)
             expect(@l2.front.value).to eq(@b1)
         end
     end
     
-    describe "Comprobación del funcionamiento de los metodos de la lista" do
+    describe "Comprobacion del funcionamiento de los metodos de la lista" do
         it "Se inserta un elemento al principo de la lista" do
             @l1.push_front(@b3)
             expect(@l1.front.value).to eq(@b3)
@@ -388,7 +387,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación de las comparaciones" do
+    describe "Comprobacion de las comparaciones" do
         it "Test mayor que" do
             expect(@b2 > @b1).to be true
             expect(@r2 > @r1).to be true
@@ -437,7 +436,7 @@ describe Biblio do
         end
     end
     
-    describe "Comprobación Enumerable" do
+    describe "Comprobacion Enumerable" do
         it "comprobrando el metodo all? con un bloque vacio" do
             expect(@l1.all?).to eq(true)
             expect(@l2.all?).to eq(true)
