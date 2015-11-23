@@ -3,6 +3,7 @@
 
 
 class List
+    include Enumerable
     attr_reader :front, :end, :size
     
     def initialize(value = nil)
@@ -122,6 +123,21 @@ class List
                 puts aux.value.to_s
             end
         end
+    end
+    
+    def each
+        return nil unless @size > 0
+        aux = @front
+        until aux.nil?
+            yield aux.value
+            aux = aux.next
+        end
+    end
+    
+    def clear
+        @size = 0
+        @front = Node.new(nil, nil, nil)
+        @end = @front
     end
     
 end

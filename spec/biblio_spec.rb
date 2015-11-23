@@ -1,15 +1,12 @@
 require 'spec_helper'
 
 describe Biblio do
-  before :each do
+    before :each do
         @b1 = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "Programming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "07/07/2013", ["978-1937785499", "1937785491"])
         @b2 = Libro.new(["Scott Chacon"], "Pro Git 2009th Edition", "Pro", "Apress" , 2009, "27/08/2009", ["978- 1430218333", "1430218339"])
         @b3 = Libro.new(["David Flanagan", "Yukihiro Matsumoto"], "The Ruby Programming Language", nil, "O’Reilly Media", 1, "04/02/2008", ["0596516177", "978-0596516178"])
         @b4 = Libro.new(["David Chelimsky", "Dave Astels", "Bryan Helmkamp", "Dan North", "Zach Dennis", "Aslak Helleson"], "The RSpec Book: Behaviour Driven Development with RSpec, Cucumber, and Friends", "The Facets of Ruby", "Pragmatic Bookshelf", 1, "25/12/2010", ["1934356379", "978-1934356371"])
         @b5 = Libro.new(["Richard E"], "Silverman Git Pocket Guide", nil, "O’Reilly Media", 1, "02/08/2013", ["1449325866", "978-1449325862"])
-        
-        @l1 = List.new
-        @l2 = List.new(@b1)
         
         @p1 = Periodico.new(["autor"], "Titulo", "Periodico", "07/07/2013", 1, nil, "123456789")
         @p2 = Periodico.new(["autor1", "autor2"], "Titulo2", "Periodico2", "08/08/2013", 1, 2, "123456789")
@@ -22,6 +19,11 @@ describe Biblio do
         @e1 = Edocumento.new(["autor"], "Titulo", "Revista", "07/07/2013", 1, nil, "123456789", "http://www.hola.com")
         @e2 = Edocumento.new(["autor1", "autor2"], "Titulo2", "Revista2", "08/08/2013", 1, 2, "123456789", "http://www.hastaluego.com")
         @e3 = Edocumento.new(["autor"], "Titulo3", "Revista3", "08/08/2013", 1, 100, "123456789", "http://www.chao.com")
+    
+        @l1 = List.new
+        @l2 = List.new(@b1)
+        @l3 = List.new(@p2)
+        @l3.push_back(@p1)
     end
     
     describe "Comprobación de la herencia de Libro" do
@@ -37,6 +39,67 @@ describe Biblio do
             expect(@b3.instance_of?Libro).to be true
         end
     end
+    
+    describe "Comprobación de la herencia de Periodico" do
+        it "Test herencia lista" do
+            expect(@p1.is_a?Object).to be true
+            expect(@p1.is_a?Referencia).to be true
+            expect(@p1.is_a?Publicacion).to be true
+            expect(@p1.instance_of?Periodico).to be true
+            expect(@p2.is_a?Object).to be true
+            expect(@p2.is_a?Referencia).to be true
+            expect(@p2.is_a?Publicacion).to be true
+            expect(@p2.instance_of?Periodico).to be true
+            expect(@p3.is_a?Object).to be true
+            expect(@p3.is_a?Referencia).to be true
+            expect(@p3.is_a?Publicacion).to be true
+            expect(@p3.instance_of?Periodico).to be true
+        end
+    end
+    
+    describe "Comprobación de la herencia de Revista" do
+        it "Test herencia lista" do
+            expect(@r1.is_a?Object).to be true
+            expect(@r1.is_a?Referencia).to be true
+            expect(@r1.is_a?Publicacion).to be true
+            expect(@r1.instance_of?Revista).to be true
+            expect(@r2.is_a?Object).to be true
+            expect(@r2.is_a?Referencia).to be true
+            expect(@r2.is_a?Publicacion).to be true
+            expect(@r2.instance_of?Revista).to be true
+            expect(@r3.is_a?Object).to be true
+            expect(@r3.is_a?Referencia).to be true
+            expect(@r3.is_a?Publicacion).to be true
+            expect(@r3.instance_of?Revista).to be true
+        end
+    end
+    
+    describe "Comprobación de la herencia de Documento Electronico" do
+        it "Test herencia lista" do
+            expect(@e1.is_a?Object).to be true
+            expect(@e1.is_a?Referencia).to be true
+            expect(@e1.is_a?Publicacion).to be true
+            expect(@e1.instance_of?Edocumento).to be true
+            expect(@e2.is_a?Object).to be true
+            expect(@e2.is_a?Referencia).to be true
+            expect(@e2.is_a?Publicacion).to be true
+            expect(@e2.instance_of?Edocumento).to be true
+            expect(@e3.is_a?Object).to be true
+            expect(@e3.is_a?Referencia).to be true
+            expect(@e3.is_a?Publicacion).to be true
+            expect(@e3.instance_of?Edocumento).to be true
+        end
+    end
+    
+    describe "Comprobación de la herencia de la lista" do
+        it "Test herencia lista" do
+            expect(@l1.is_a?Object).to be true
+            expect(@l1.instance_of?List).to be true
+            expect(@l2.is_a?Object).to be true
+            expect(@l2.instance_of?List).to be true
+        end
+    end
+    
     
     describe "Comprobación de una correcta construcción de Libro" do
         it "Existe al menos un autor" do
@@ -73,6 +136,130 @@ describe Biblio do
             expect(@b1.isbn).not_to eq(nil)
             expect(@b2.isbn).not_to eq(nil)
             expect(@b3.isbn).not_to eq(nil)
+        end
+    end
+    
+    describe "Comprobación de una correcta construcción de Periodico" do
+        it "Existe al menos un autor" do
+            expect(@p1.autores).not_to eq(nil)
+            expect(@p2.autores).not_to eq(nil)
+            expect(@p3.autores).not_to eq(nil)
+        end
+        it "Existe titulo" do
+            expect(@p1.titulo).not_to eq(nil)
+            expect(@p2.titulo).not_to eq(nil)
+            expect(@p3.titulo).not_to eq(nil)
+        end
+        it "Existe editorial" do
+            expect(@p1.editorial).not_to eq(nil)
+            expect(@p2.editorial).not_to eq(nil)
+            expect(@p3.editorial).not_to eq(nil)
+        end
+        it "Existe fecha" do
+            expect(@p1.fecha_publicacion).not_to eq(nil)
+            expect(@p2.fecha_publicacion).not_to eq(nil)
+            expect(@p3.fecha_publicacion).not_to eq(nil)
+        end
+        it "Existe pagina de inicio" do
+            expect(@p1.pinicio).not_to eq(nil)
+            expect(@p2.pinicio).not_to eq(nil)
+            expect(@p3.pinicio).not_to eq(nil)
+        end
+        it "Existe pagina de fin" do
+            expect(@p1.pfin).to eq(nil)
+            expect(@p2.pfin).not_to eq(nil)
+            expect(@p3.pfin).not_to eq(nil)
+        end
+        it "Existe issn" do
+            expect(@p1.issn).not_to eq(nil)
+            expect(@p2.issn).not_to eq(nil)
+            expect(@p3.issn).not_to eq(nil)
+        end
+    end
+    
+    describe "Comprobación de una correcta construcción de Revista" do
+        it "Existe al menos un autor" do
+            expect(@r1.autores).not_to eq(nil)
+            expect(@r2.autores).not_to eq(nil)
+            expect(@r3.autores).not_to eq(nil)
+        end
+        it "Existe titulo" do
+            expect(@r1.titulo).not_to eq(nil)
+            expect(@r2.titulo).not_to eq(nil)
+            expect(@r3.titulo).not_to eq(nil)
+        end
+        it "Existe editorial" do
+            expect(@r1.editorial).not_to eq(nil)
+            expect(@r2.editorial).not_to eq(nil)
+            expect(@r3.editorial).not_to eq(nil)
+        end
+        it "Existe fecha" do
+            expect(@r1.fecha_publicacion).not_to eq(nil)
+            expect(@r2.fecha_publicacion).not_to eq(nil)
+            expect(@r3.fecha_publicacion).not_to eq(nil)
+        end
+        it "Existe pagina de inicio" do
+            expect(@r1.pinicio).not_to eq(nil)
+            expect(@r2.pinicio).not_to eq(nil)
+            expect(@r3.pinicio).not_to eq(nil)
+        end
+        it "Existe pagina de fin" do
+            expect(@r1.pfin).to eq(nil)
+            expect(@r2.pfin).not_to eq(nil)
+            expect(@r3.pfin).not_to eq(nil)
+        end
+        it "Existe issn" do
+            expect(@r1.issn).not_to eq(nil)
+            expect(@r2.issn).not_to eq(nil)
+            expect(@r3.issn).not_to eq(nil)
+        end
+        it "Existe numero de revista" do
+            expect(@r1.numero).not_to eq(nil)
+            expect(@r2.numero).not_to eq(nil)
+            expect(@r3.numero).not_to eq(nil)
+        end
+    end
+    
+    describe "Comprobación de una correcta construcción de Documento Electronico" do
+        it "Existe al menos un autor" do
+            expect(@e1.autores).not_to eq(nil)
+            expect(@e2.autores).not_to eq(nil)
+            expect(@e3.autores).not_to eq(nil)
+        end
+        it "Existe titulo" do
+            expect(@e1.titulo).not_to eq(nil)
+            expect(@e2.titulo).not_to eq(nil)
+            expect(@e3.titulo).not_to eq(nil)
+        end
+        it "Existe editorial" do
+            expect(@e1.editorial).not_to eq(nil)
+            expect(@e2.editorial).not_to eq(nil)
+            expect(@e3.editorial).not_to eq(nil)
+        end
+        it "Existe fecha" do
+            expect(@e1.fecha_publicacion).not_to eq(nil)
+            expect(@e2.fecha_publicacion).not_to eq(nil)
+            expect(@e3.fecha_publicacion).not_to eq(nil)
+        end
+        it "Existe pagina de inicio" do
+            expect(@e1.pinicio).not_to eq(nil)
+            expect(@e2.pinicio).not_to eq(nil)
+            expect(@e3.pinicio).not_to eq(nil)
+        end
+        it "Existe pagina de fin" do
+            expect(@e1.pfin).to eq(nil)
+            expect(@e2.pfin).not_to eq(nil)
+            expect(@e3.pfin).not_to eq(nil)
+        end
+        it "Existe issn" do
+            expect(@e1.issn).not_to eq(nil)
+            expect(@e2.issn).not_to eq(nil)
+            expect(@e3.issn).not_to eq(nil)
+        end
+        it "Existe numero de revista" do
+            expect(@e1.url).not_to eq(nil)
+            expect(@e2.url).not_to eq(nil)
+            expect(@e3.url).not_to eq(nil)
         end
     end
     
@@ -137,76 +324,24 @@ describe Biblio do
       end
     end
     
-    describe "Comprobación de la herencia de Periodico" do
-        it "Test herencia lista" do
-            expect(@p1.is_a?Object).to be true
-            expect(@p1.is_a?Referencia).to be true
-            expect(@p1.is_a?Publicacion).to be true
-            expect(@p1.instance_of?Periodico).to be true
-            expect(@p2.is_a?Object).to be true
-            expect(@p2.is_a?Referencia).to be true
-            expect(@p2.is_a?Publicacion).to be true
-            expect(@p2.instance_of?Periodico).to be true
-            expect(@p3.is_a?Object).to be true
-            expect(@p3.is_a?Referencia).to be true
-            expect(@p3.is_a?Publicacion).to be true
-            expect(@p3.instance_of?Periodico).to be true
-        end
-    end
-    
-    describe "Comprobación de la herencia de Revista" do
-        it "Test herencia lista" do
-            expect(@r1.is_a?Object).to be true
-            expect(@r1.is_a?Referencia).to be true
-            expect(@r1.is_a?Publicacion).to be true
-            expect(@r1.instance_of?Revista).to be true
-            expect(@r2.is_a?Object).to be true
-            expect(@r2.is_a?Referencia).to be true
-            expect(@r2.is_a?Publicacion).to be true
-            expect(@r2.instance_of?Revista).to be true
-            expect(@r3.is_a?Object).to be true
-            expect(@r3.is_a?Referencia).to be true
-            expect(@r3.is_a?Publicacion).to be true
-            expect(@r3.instance_of?Revista).to be true
-        end
-    end
-    
-    describe "Comprobación de la herencia de Documento Electronico" do
-        it "Test herencia lista" do
-            expect(@e1.is_a?Object).to be true
-            expect(@e1.is_a?Referencia).to be true
-            expect(@e1.is_a?Publicacion).to be true
-            expect(@e1.instance_of?Edocumento).to be true
-            expect(@e2.is_a?Object).to be true
-            expect(@e2.is_a?Referencia).to be true
-            expect(@e2.is_a?Publicacion).to be true
-            expect(@e2.instance_of?Edocumento).to be true
-            expect(@e3.is_a?Object).to be true
-            expect(@e3.is_a?Referencia).to be true
-            expect(@e3.is_a?Publicacion).to be true
-            expect(@e3.instance_of?Edocumento).to be true
-        end
-    end
-    
-    describe "Comprobación de la herencia de la lista" do
-        it "Test herencia lista" do
-            expect(@l1.is_a?Object).to be true
-            expect(@l1.instance_of?List).to be true
-            expect(@l2.is_a?Object).to be true
-            expect(@l2.instance_of?List).to be true
-        end
-    end
-    
     describe "Comprobación de una correcta construcción de la lista" do
         it "Existe al menos un Nodo" do
             expect(@l1.front).not_to eq(nil)
             expect(@l2.front).not_to eq(nil)
         end
-        it "Los nodos tienen un valor y un sucesor" do
+        it "Los nodos tienen un valor, un sucesor y un predecesor" do
             expect(@l1.front.value).to eq(nil)
             expect(@l1.front.next).to eq(nil)
+            expect(@l1.front.previous).to eq(nil)
+            expect(@l1.end.value).to eq(nil)
+            expect(@l1.end.next).to eq(nil)
+            expect(@l1.end.previous).to eq(nil)
             expect(@l2.front.value).not_to eq(nil)
             expect(@l2.front.next).to eq(nil)
+            expect(@l2.front.previous).to eq(nil)
+            expect(@l2.end.value).not_to eq(nil)
+            expect(@l2.end.next).to eq(nil)
+            expect(@l2.end.previous).to eq(nil)
         end
     end
     
@@ -249,6 +384,94 @@ describe Biblio do
             expect(@l1.get_pos(1).value).to eq(@b2)
             @l1.insert(2, @b3)
             expect(@l1.get_pos(2).value).to eq(@b3)
+        end
+    end
+    
+    describe "Comprobación de las comparaciones" do
+        it "Test mayor que" do
+            expect(@b2 > @b1).to be true
+            expect(@r2 > @r1).to be true
+            expect(@p2 > @p1).to be true
+            expect(@e2 > @e1).to be true
+            expect(@p2 > @e1).to be true
+        end
+        it "Test mayor o igual que" do
+            expect(@b2 >= @b1).to be true
+            expect(@r2 >= @r1).to be true
+            expect(@p1 >= @p1).to be true
+            expect(@e1 >= @e1).to be true
+            expect(@p2 >= @e1).to be true
+        end
+        it "Test menor que" do
+            expect(@b1 < @b2).to be true
+            expect(@r1 < @r2).to be true
+            expect(@p1 < @p2).to be true
+            expect(@e1 < @e2).to be true
+            expect(@p1 < @e2).to be true
+        end
+        it "Test menor o igual que" do
+            expect(@b1 <= @b2).to be true
+            expect(@r1 <= @r2).to be true
+            expect(@p1 <= @p1).to be true
+            expect(@e1 <= @e1).to be true
+            expect(@e1 <= @p2).to be true
+        end
+        it "Test igual que" do
+            expect(@b1 == @b1).to be true
+            expect(@r1 == @r1).to be true
+            expect(@p1 == @p1).to be true
+            expect(@e1 == @e1).to be true
+            expect(@e1 == @p1).to be true
+            expect(@r1 == @p1).to be true
+            expect(@r1 == @e1).to be true
+        end
+        it "Test distinto que" do
+            expect(@b1 != @b2).to be true
+            expect(@r1 != @r2).to be true
+            expect(@p1 != @p2).to be true
+            expect(@e1 != @e2).to be true
+            expect(@e1 != @p2).to be true
+            expect(@p2 != @r1).to be true
+            expect(@r2 != @e1).to be true
+        end
+    end
+    
+    describe "Comprobación Enumerable" do
+        it "comprobrando el metodo all? con un bloque vacio" do
+            expect(@l1.all?).to eq(true)
+            expect(@l2.all?).to eq(true)
+        end
+        it "comprobrando el metodo any?" do
+            expect(@l1.any?).to eq(false)
+            expect(@l2.any?).to eq(true)
+        end
+        it "comprobrando el metodo collect" do
+            expect(@l1.map{|i| i}).to eq([])
+            expect(@l2.map{|i| i}).to eq([@b1])
+            expect(@l2.collect{|i| i}).to eq([@b1])
+        end 
+        it "comprobrando el metodo count" do
+            expect(@l1.count).to eq(0)
+            expect(@l2.count).to eq(1)
+            expect(@l3.count).to eq(2)
+        end
+        it "comprobrando el metodo detect" do
+            expect(@l3.detect {|i| i == @b3}).to eq(nil)
+            expect(@l3.detect {|i| i == @p2}).to eq(@p2)
+            expect(@l3.find {|i| i == @b3}).to eq(nil)
+            expect(@l3.find {|i| i == @p1}).to eq(@p1)
+        end
+        it "comprobrando drop" do
+            expect(@l3.drop(1)).to eq([@p1])
+        end
+        it "comprobrando max" do
+            expect(@l3.max).to eq(@p2)
+        end
+        it "comprobrando min" do
+            expect(@l3.min).to eq(@p1)
+        end
+        it "comprobrando sort" do
+            expect(@l3.sort).to eq([@p1,@p2])
         end
     end
 end
