@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Periodico < Publicacion
     
     def to_s

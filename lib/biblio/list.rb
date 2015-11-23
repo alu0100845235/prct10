@@ -1,3 +1,4 @@
+# encoding: utf-8
 #require "./node.rb"
 # create a Struct with :value and :next
 

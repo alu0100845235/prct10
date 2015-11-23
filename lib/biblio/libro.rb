@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Libro < Referencia
     attr_reader :serie, :n_edicion, :isbn
     

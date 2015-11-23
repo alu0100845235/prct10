@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Edocumento < Publicacion
     attr_reader :url
     
