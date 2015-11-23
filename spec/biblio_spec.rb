@@ -282,7 +282,7 @@ describe Biblio do
         it "Test método editorial" do
             expect(@b1.editorial).to eq("Pragmatic Bookshelf")
             expect(@b2.editorial).to eq("Apress")
-            expect(@b3.editorial).to eq("O’Reilly Media")
+            expect(@b3.editorial).to eq("O'Reilly Media")
         end
         it "Test método edicion" do
             expect(@b1.n_edicion).to eq(4)
@@ -296,7 +296,7 @@ describe Biblio do
         end
         it "Test método isbn" do
             expect(@b1.isbn).to eq(["978-1937785499", "1937785491"])
-            expect(@b2.isbn).to eq(["978- 1430218333", "1430218339"])
+            expect(@b2.isbn).to eq(["978-1430218333", "1430218339"])
             expect(@b3.isbn).to eq(["0596516177", "978-0596516178"])
         end
         it "Test método to_s (nos devuelve una referencia formateada)" do
