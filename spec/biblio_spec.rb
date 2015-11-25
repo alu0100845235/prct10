@@ -1,5 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
+require 'coveralls'
+Coveralls.wear!
 
 describe Biblio do
     before :each do
