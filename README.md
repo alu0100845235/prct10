@@ -2,6 +2,6 @@
 
 Programación Orientada a Objetos: Módulos.
 
-# Desarrolladores
+# Desarrollador
 
 * Ruyman Rodríguez Martín
