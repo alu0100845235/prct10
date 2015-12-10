@@ -1,6 +1,6 @@
-#Práctica 9 de LPP
+#Práctica 10 de LPP
 
-Programación Orientada a Objetos: Módulos.
+Programación Funcional. Funciones de orden superior.
 
 # Desarrollador
 
