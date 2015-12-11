@@ -33,6 +33,8 @@ describe Biblio do
         @r13 = Revista.new(["autor apellido", "autor2 apellido2"], "Titulo3", "Revista2", "07/09/2013", 11, 1, 2, "123456789")
         @r14 = Revista.new(["autor apellido"], "Titulo3", "Revista3", "08/08/2013", 12, 1, 100, "123456789")
         @bx = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "the Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "08/08/2013", ["978-1937785499", "1937785491"])
+    
+        @l10 = List.new
     end
     
     describe "Comprobacion de la herencia de Libro" do
@@ -523,6 +525,11 @@ describe Biblio do
             expect(@b1 < @bx).to be true
             expect(@b1.to_s).to eq("Fowler, C., Hunt, A., Thomas, D..\n\tProgramming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide\n\tThe Facets of Ruby\n\tPragmatic Bookshelf; 4 edición (07, July 2013 JUL)\n\tISBN-13: 978-1937785499\n\tISBN-10: 1937785491\n\t")
             expect(@bx.to_s).to eq("Fowler, C., Hunt, A., Thomas, D..\n\tThe Pragmatic Programmers Guide\n\tThe Facets of Ruby\n\tPragmatic Bookshelf; 4 edición (08, August 2013 AGO)\n\tISBN-13: 978-1937785499\n\tISBN-10: 1937785491\n\t")
+        end
+        it "Test de la lista de citas" do
+            @l10.push_front(@b1)
+            @l10.push_front(@bx)
+            expect(@l10.sort).to eq([@b1,@bx])
         end
     end
 end
