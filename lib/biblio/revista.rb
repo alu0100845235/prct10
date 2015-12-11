@@ -18,11 +18,14 @@ class Revista < Publicacion
             str_autores += autor + ", "
         end
         str_autores = str_autores[0, str_autores.length - 2] + "."
+        if @autores.length > 1
+            str_autores.sub(", " + autores.last, "& " + autores.last + ".")
+        end
         
         if(@pfin != nil)
-            salida = "#{str_autores} (#{@fecha_publicacion.strftime("%d, %B %Y")}).\n#{@titulo}. #{@editorial}, N. #{@numero}.\np. #{@pinicio} - #{@pfinal}.\nISSN: #{@ISSN}"
+            salida = "#{str_autores} (#{@fecha_publicacion.strftime("%d, %B %Y")}).\n\t#{@titulo}. #{@editorial}, N. #{@numero}.\n\tp. #{@pinicio} - #{@pfinal}.\n\tISSN: #{@ISSN}"
         else
-            salida = "#{str_autores} (#{@fecha_publicacion.strftime("%d, %B %Y")}).\n#{@titulo}. #{@editorial}, N. #{@numero}.\np. #{@pinicio}.\nISSN: #{@ISSN}"
+            salida = "#{str_autores} (#{@fecha_publicacion.strftime("%d, %B %Y")}).\n\t#{@titulo}. #{@editorial}, N. #{@numero}.\n\tp. #{@pinicio}.\n\tISSN: #{@ISSN}"
         end
         salida
     end

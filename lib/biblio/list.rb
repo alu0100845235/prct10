@@ -115,16 +115,16 @@ class List
         aux
     end
     
-    def printing
-        if @front.value != nil
-            aux = @front
-            puts @front.value
-            while aux.next != nil
-                aux = aux.next
-                puts aux.value.to_s
-            end
-        end
-    end
+    #def printing
+    #    if @front.value != nil
+    #        aux = @front
+    #        puts @front.value
+    #        while aux.next != nil
+    #            aux = aux.next
+    #            puts aux.value.to_s
+    #        end
+    #    end
+    #end
     
     def each
         return nil unless @size > 0
@@ -141,4 +141,14 @@ class List
         @end = @front
     end
     
+    def sort_list
+        aux = self.sort
+        clear
+        
+        aux.each do |a|
+            push_back(a)
+        end
+    end
+
 end
+

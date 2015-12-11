@@ -25,21 +25,24 @@ class Libro < Referencia
             str_autores += autor + ", "
         end
         str_autores = str_autores[0, str_autores.length - 2] + "."
-
+        if @autores.length > 1
+            str_autores.sub(", " + autores.last, "& " + autores.last + ".")
+        end
+        
         # isbn
         str_isbn = ""
         @isbn.each do |n_isbn|
             if n_isbn.length > 10
-                str_isbn += "ISBN-13: #{n_isbn}\n"
+                str_isbn += "ISBN-13: #{n_isbn}\n\t"
             else
-                str_isbn += "ISBN-10: #{n_isbn}\n"
+                str_isbn += "ISBN-10: #{n_isbn}\n\t"
             end
         end
         
         if(serie != nil)
-            salida = "#{str_autores}\n#{titulo}\n#{serie}\n#{@editorial}; #{@n_edicion} edición (#{@fecha_publicacion.strftime("%d, %B %Y")})\n#{str_isbn}"
+            salida = "#{str_autores}\n\t#{titulo}\n\t#{serie}\n\t#{@editorial}; #{@n_edicion} edición (#{@fecha_publicacion.strftime("%d, %B %Y")})\n\t#{str_isbn}"
         else
-            salida = "#{str_autores}\n#{titulo}\n#{@editorial}; #{@n_edicion} edición (#{@fecha_publicacion.strftime("%d, %B %Y")})\n#{str_isbn}"
+            salida = "#{str_autores}\n\t#{titulo}\n\t#{@editorial}; #{@n_edicion} edición (#{@fecha_publicacion.strftime("%d, %B %Y")})\n\t#{str_isbn}"
         end
         salida
     end

@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Biblio do
     before :each do
-        @b1 = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "Programming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "07/07/2013", ["978-1937785499", "1937785491"])
+        @b1 = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "programming ruby 1.9 & 2.0: the Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "07/07/2013", ["978-1937785499", "1937785491"])
         @b2 = Libro.new(["Scott Chacon"], "Pro Git 2009th Edition", "Pro", "Apress" , 2009, "27/08/2009", ["978-1430218333", "1430218339"])
         @b3 = Libro.new(["David Flanagan", "Yukihiro Matsumoto"], "The Ruby Programming Language", nil, "O'Reilly Media", 1, "04/02/2008", ["0596516177", "978-0596516178"])
         @b4 = Libro.new(["David Chelimsky", "Dave Astels", "Bryan Helmkamp", "Dan North", "Zach Dennis", "Aslak Helleson"], "The RSpec Book: Behaviour Driven Development with RSpec, Cucumber, and Friends", "The Facets of Ruby", "Pragmatic Bookshelf", 1, "25/12/2010", ["1934356379", "978-1934356371"])
@@ -25,6 +25,13 @@ describe Biblio do
         @l2 = List.new(@b1)
         @l3 = List.new(@p2)
         @l3.push_back(@p1)
+        
+        
+        # Practica 10
+        @r11 = Revista.new(["autor apellido"], "Titulo", "Revista", "07/07/2013", 10, 1, nil, "123456789")
+        @r12 = Revista.new(["autor apellido", "autor2 apellido2"], "Titulo2", "Revista2", "08/08/2013", 11, 1, 2, "123456789")
+        @r13 = Revista.new(["autor apellido", "autor2 apellido2"], "Titulo3", "Revista2", "07/09/2013", 11, 1, 2, "123456789")
+        @r14 = Revista.new(["autor apellido"], "Titulo3", "Revista3", "08/08/2013", 12, 1, 100, "123456789")
     end
     
     describe "Comprobacion de la herencia de Libro" do
@@ -266,9 +273,9 @@ describe Biblio do
     
     describe "Comprobacion de un correcto funcionamiento de los metodos de Libro" do
         it "Test metodo autor" do
-            expect(@b1.autores).to eq(["Dave Thomas", "Andy Hunt", "Chad Fowler"])
-            expect(@b2.autores).to eq(["Scott Chacon"])
-            expect(@b3.autores).to eq(["David Flanagan", "Yukihiro Matsumoto"])
+            expect(@b1.autores).to eq(["Fowler, C.", "Hunt, A.", "Thomas, D."])
+            expect(@b2.autores).to eq(["Chacon, S."])
+            expect(@b3.autores).to eq(["Flanagan, D.", "Matsumoto, Y."])
         end
         it "Test metodo titulo" do
             expect(@b1.titulo).to eq("Programming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide")
@@ -390,50 +397,29 @@ describe Biblio do
     
     describe "Comprobacion de las comparaciones" do
         it "Test mayor que" do
-            expect(@b2 > @b1).to be true
-            expect(@r2 > @r1).to be true
-            expect(@p2 > @p1).to be true
-            expect(@e2 > @e1).to be true
-            expect(@p2 > @e1).to be true
+            expect(@b1 > @b2).to be true
+            expect(@b3 > @b2).to be true
         end
         it "Test mayor o igual que" do
-            expect(@b2 >= @b1).to be true
-            expect(@r2 >= @r1).to be true
-            expect(@p1 >= @p1).to be true
-            expect(@e1 >= @e1).to be true
-            expect(@p2 >= @e1).to be true
+            expect(@b1 >= @b2).to be true
+            expect(@b3 >= @b2).to be true
         end
         it "Test menor que" do
-            expect(@b1 < @b2).to be true
-            expect(@r1 < @r2).to be true
-            expect(@p1 < @p2).to be true
-            expect(@e1 < @e2).to be true
-            expect(@p1 < @e2).to be true
+            expect(@b2 < @b1).to be true
+            expect(@b2 < @b3).to be true
         end
         it "Test menor o igual que" do
-            expect(@b1 <= @b2).to be true
-            expect(@r1 <= @r2).to be true
-            expect(@p1 <= @p1).to be true
-            expect(@e1 <= @e1).to be true
-            expect(@e1 <= @p2).to be true
+            expect(@b2 <= @b1).to be true
+            expect(@b2 <= @b3).to be true
+            expect(@b3 <= @b3).to be true
         end
         it "Test igual que" do
             expect(@b1 == @b1).to be true
-            expect(@r1 == @r1).to be true
-            expect(@p1 == @p1).to be true
-            expect(@e1 == @e1).to be true
-            expect(@e1 == @p1).to be true
-            expect(@r1 == @p1).to be true
-            expect(@r1 == @e1).to be true
+            expect(@b2 == @b2).to be true
         end
         it "Test distinto que" do
+            expect(@b3 != @b2).to be true
             expect(@b1 != @b2).to be true
-            expect(@r1 != @r2).to be true
-            expect(@p1 != @p2).to be true
-            expect(@e1 != @e2).to be true
-            expect(@e1 != @p2).to be true
-            expect(@p2 != @r1).to be true
-            expect(@r2 != @e1).to be true
         end
     end
     
@@ -473,6 +459,68 @@ describe Biblio do
         end
         it "comprobrando sort" do
             expect(@l3.sort).to eq([@p1,@p2])
+        end
+    end
+    
+    #@r11 = Revista.new(["autor apellido"], "Titulo", "Revista", "07/07/2013", 10, 1, nil, "123456789")
+    #@r12 = Revista.new(["autor apellido", "autor2 apellido2"], "Titulo2", "Revista2", "08/08/2013", 11, 1, 2, "123456789")
+    #@r13 = Revista.new(["autor apellido", "autor2 apellido2"], "Titulo3", "Revista2", "07/09/2013", 11, 1, 2, "123456789")
+    #@r14 = Revista.new(["autor apellido"], "Titulo3", "Revista3", "08/08/2013", 12, 1, 100, "123456789")
+    
+    describe "Comprobacion con las comparaciones de las Citas" do
+        it "Test mayor que" do
+            expect(@r12 > @r11).to be true
+            expect(@r13 > @r12).to be true
+            expect(@r14 > @r11).to be true
+        end
+        it "Test mayor o igual que" do
+            expect(@r12 >= @r11).to be true
+            expect(@r13 >= @r12).to be true
+            expect(@r14 >= @r11).to be true
+        end
+        it "Test menor que" do
+            expect(@r11 < @r12).to be true
+            expect(@r12 < @r13).to be true
+            expect(@r11 < @r14).to be true
+        end
+        it "Test menor o igual que" do
+            expect(@r11 <= @r12).to be true
+            expect(@r12 <= @r13).to be true
+            expect(@r11 <= @r14).to be true
+        end
+        it "Test igual que" do
+            expect(@r11 == @r11).to be true
+            expect(@r12 == @r12).to be true
+        end
+        it "Test distinto que" do
+            expect(@r13 != @r12).to be true
+            expect(@r11 != @r14).to be true
+        end
+    end
+    
+    #@b1 = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "programming ruby 1.9 & 2.0: the Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "07/07/2013", ["978-1937785499", "1937785491"])
+    #@b2 = Libro.new(["Scott Chacon"], "Pro Git 2009th Edition", "Pro", "Apress" , 2009, "27/08/2009", ["978-1430218333", "1430218339"])
+    #@b3 = Libro.new(["David Flanagan", "Yukihiro Matsumoto"], "The Ruby Programming Language", nil, "O'Reilly Media", 1, "04/02/2008", ["0596516177", "978-0596516178"])
+ 
+    describe "Comprobacion de un correcto funcionamiento de los metodos de Libro" do
+        it "Test metodo autor" do
+            expect(@b1.autores).to eq(["Fowler, C.", "Hunt, A.", "Thomas, D."])
+            expect(@b2.autores).to eq(["Chacon, S."])
+            expect(@b3.autores).to eq(["Flanagan, D.", "Matsumoto, Y."])
+        end
+        it "Test metodo titulo" do
+            expect(@b1.titulo).to eq("Programming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide")
+            expect(@b2.titulo).to eq("Pro Git 2009th Edition")
+            expect(@b3.titulo).to eq("The Ruby Programming Language")
+        end
+        it "Test metodo serie" do
+            expect(@b1.serie).to eq("The Facets of Ruby")
+            expect(@b2.serie).to eq("Pro")
+            expect(@b3.serie).to eq(nil)
+        end
+        it "Test metodo to_s (nos devuelve una referencia formateada)" do
+            expect(@b1.to_s).to eq("Fowler, C., Hunt, A., Thomas, D..\n\tProgramming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide\n\tThe Facets of Ruby\n\tPragmatic Bookshelf; 4 edición (07, July 2013)\n\tISBN-13: 978-1937785499\n\tISBN-10: 1937785491\n\t")
+            expect(@b2.to_s).to eq("Chacon, S..\n\tPro Git 2009th Edition\n\tPro\n\tApress; 2009 edición (27, August 2009)\n\tISBN-13: 978-1430218333\n\tISBN-10: 1430218339\n\t")
         end
     end
 end

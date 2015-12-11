@@ -18,6 +18,7 @@ class Edocumento < Publicacion
             str_autores += autor + ", "
         end
         str_autores = str_autores[0, str_autores.length - 2] + "."
+        str_autores.sub(", &", "&")
         
         if(@pfin != nil)
             salida = "#{str_autores} (#{@fecha_publicacion.strftime("%d, %B %Y")}).\n#{@titulo}. #{@editorial}.\np. #{@pinicio} - #{@pfinal}.\nISSN: #{@ISSN}\nurl: #{@url}"
