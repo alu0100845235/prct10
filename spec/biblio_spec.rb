@@ -32,6 +32,7 @@ describe Biblio do
         @r12 = Revista.new(["autor apellido", "autor2 apellido2"], "Titulo2", "Revista2", "08/08/2013", 11, 1, 2, "123456789")
         @r13 = Revista.new(["autor apellido", "autor2 apellido2"], "Titulo3", "Revista2", "07/09/2013", 11, 1, 2, "123456789")
         @r14 = Revista.new(["autor apellido"], "Titulo3", "Revista3", "08/08/2013", 12, 1, 100, "123456789")
+        @bx = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "the Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "08/08/2013", ["978-1937785499", "1937785491"])
     end
     
     describe "Comprobacion de la herencia de Libro" do
@@ -501,8 +502,9 @@ describe Biblio do
     #@b1 = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "programming ruby 1.9 & 2.0: the Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "07/07/2013", ["978-1937785499", "1937785491"])
     #@b2 = Libro.new(["Scott Chacon"], "Pro Git 2009th Edition", "Pro", "Apress" , 2009, "27/08/2009", ["978-1430218333", "1430218339"])
     #@b3 = Libro.new(["David Flanagan", "Yukihiro Matsumoto"], "The Ruby Programming Language", nil, "O'Reilly Media", 1, "04/02/2008", ["0596516177", "978-0596516178"])
- 
-    describe "Comprobacion de un correcto funcionamiento de los metodos de Libro" do
+    #@bx = Libro.new(["Dave Thomas", "Andy Hunt", "Chad Fowler"], "the Pragmatic Programmers Guide", "The Facets of Ruby", "Pragmatic Bookshelf", 4, "08/08/2013", ["978-1937785499", "1937785491"])
+    
+    describe "Comprobacion de un correcto funcionamiento del formateo de Citas" do
         it "Test metodo autor" do
             expect(@b1.autores).to eq(["Fowler, C.", "Hunt, A.", "Thomas, D."])
             expect(@b2.autores).to eq(["Chacon, S."])
@@ -513,14 +515,14 @@ describe Biblio do
             expect(@b2.titulo).to eq("Pro Git 2009th Edition")
             expect(@b3.titulo).to eq("The Ruby Programming Language")
         end
-        it "Test metodo serie" do
-            expect(@b1.serie).to eq("The Facets of Ruby")
-            expect(@b2.serie).to eq("Pro")
-            expect(@b3.serie).to eq(nil)
-        end
         it "Test metodo to_s (nos devuelve una referencia formateada)" do
             expect(@b1.to_s).to eq("Fowler, C., Hunt, A., Thomas, D..\n\tProgramming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide\n\tThe Facets of Ruby\n\tPragmatic Bookshelf; 4 edición (07, July 2013)\n\tISBN-13: 978-1937785499\n\tISBN-10: 1937785491\n\t")
-            #expect(@b2.to_s).to eq("Chacon, S..\n\tPro Git 2009th Edition\n\tPro\n\tApress; 2009 edición (27, August 2009)\n\tISBN-13: 978-1430218333\n\tISBN-10: 1430218339\n\t")
+            expect(@b2.to_s).to eq("Chacon, S..\n\tPro Git 2009th Edition\n\tPro\n\tApress; 2009 edición (27, August 2009)\n\tISBN-13: 978-1430218333\n\tISBN-10: 1430218339\n\t")
+        end
+        it "Test de formateo al existir dos referencias en las que solo varia el titulo" do
+            expect(@b1 < @bx).to be true
+            expect(@b1.to_s).to eq("Fowler, C., Hunt, A., Thomas, D..\n\tProgramming Ruby 1.9 & 2.0: The Pragmatic Programmers Guide\n\tThe Facets of Ruby\n\tPragmatic Bookshelf; 4 edición (07, July 2013 JUL)\n\tISBN-13: 978-1937785499\n\tISBN-10: 1937785491\n\t")
+            expect(@bx.to_s).to eq("Fowler, C., Hunt, A., Thomas, D..\n\tThe Pragmatic Programmers Guide\n\tThe Facets of Ruby\n\tPragmatic Bookshelf; 4 edición (08, August 2013 AGO)\n\tISBN-13: 978-1937785499\n\tISBN-10: 1937785491\n\t")
         end
     end
 end

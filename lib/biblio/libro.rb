@@ -39,10 +39,17 @@ class Libro < Referencia
             end
         end
         
-        if(serie != nil)
-            salida = "#{str_autores}\n\t#{titulo}\n\t#{serie}\n\t#{@editorial}; #{@n_edicion} edición (#{@fecha_publicacion.strftime("%d, %B %Y")})\n\t#{str_isbn}"
+        #
+        if @sufijo
+            str_sufijo = " " + @sufijo
         else
-            salida = "#{str_autores}\n\t#{titulo}\n\t#{@editorial}; #{@n_edicion} edición (#{@fecha_publicacion.strftime("%d, %B %Y")})\n\t#{str_isbn}"
+            str_sufijo = ""
+        end
+        
+        if(serie != nil)
+            salida = "#{str_autores}\n\t#{titulo}\n\t#{serie}\n\t#{@editorial}; #{@n_edicion} edición (#{@fecha_publicacion.strftime("%d, %B %Y")}#{str_sufijo})\n\t#{str_isbn}"
+        else
+            salida = "#{str_autores}\n\t#{titulo}\n\t#{@editorial}; #{@n_edicion} edición (#{@fecha_publicacion.strftime("%d, %B %Y")}#{str_sufijo})\n\t#{str_isbn}"
         end
         salida
     end

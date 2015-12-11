@@ -4,6 +4,7 @@ require 'date'
 class Referencia
     include Comparable
     attr_reader :autores, :titulo, :editorial, :fecha_publicacion
+    attr_accessor :sufijo
     
     def initialize(autores, titulo, editorial, fecha_publicacion)
         raise ArgumentError, "Autores debe ser un array" unless autores.is_a?(Array)
@@ -64,9 +65,10 @@ class Referencia
         return @fecha_publicacion.year <=> other.fecha_publicacion.year unless @fecha_publicacion.year == other.fecha_publicacion.year
         # Ordenamos por titulo
         if @titulo != other.titulo
+            # Insertamos sufijos
             mes = ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OPT", "NOV", "DIC"]
-            @sufijo = mes[@fecha_publicacion.mon]
-            #other.sufijo = mes[other.fecha_publicacion.mon]
+            @sufijo = mes[@fecha_publicacion.mon - 1]
+            other.sufijo = mes[other.fecha_publicacion.mon - 1]
             return @titulo <=> other.titulo
         else
             return 0
